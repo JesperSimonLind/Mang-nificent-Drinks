@@ -1,15 +1,12 @@
-import { Stack, Tabs } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Stack } from "expo-router";
 
 const RootLayout = () => {
   return (
-    <View style={{ flex: 1 }}>
-      {/* <Stack /> */}
-      <Tabs />
-    </View>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(user)" />
+      <Stack.Screen name="(admin)" />
+    </Stack>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default RootLayout;

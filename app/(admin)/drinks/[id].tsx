@@ -1,0 +1,73 @@
+import { useEffect, useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import DrinkForm, { DrinkValues } from "../../../components/DrinkForm";
+import { getDrinkById, updateDrink } from "../../../firebase/test";
+
+type Drink = Partial<DrinkValues> & { id: string };
+
+const EditDrink = () => {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const router = useRouter();
+  const [drink, setDrink] = useState<Drink | null>(null);
+
+  useEffect(() => {
+    async function loadDrink() {
+      try {
+        setDrink((await getDrinkById(id)) as Drink | null);
+      } catch (error) {
+        console.error("Unable to load drink for editing:", error);
+      }
+    }
+    loadDrink();
+  }, [id]);
+
+  const handleSave = async (values: DrinkValues) => {
+    if (!drink) return;
+    await updateDrink(drink.id, values);
+    router.replace("/(admin)/drinks");
+  };
+
+  if (!drink)
+    return (
+      <View style={styles.centered}>
+        <Text style={styles.muted}>Loading drink...</Text>
+      </View>
+    );
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Edit drink</Text>
+      <DrinkForm
+        initialValues={{
+          name: drink.name ?? "",
+          description: drink.description ?? "",
+          ingredients: drink.ingredients ?? [],
+          available: drink.available ?? true,
+          imageUrl: drink.imageUrl ?? "",
+        }}
+        onSubmit={handleSave}
+        submitLabel="Save changes"
+      />
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#f4f6f1",
+    flexGrow: 1,
+    padding: 20,
+    paddingTop: 32,
+  },
+  centered: {
+    alignItems: "center",
+    backgroundColor: "#f4f6f1",
+    flex: 1,
+    justifyContent: "center",
+  },
+  title: { color: "#1c2d2a", fontSize: 30, fontWeight: "700" },
+  muted: { color: "#53605a", fontSize: 16 },
+});
+
+export default EditDrink;

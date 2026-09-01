@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getDrinks } from "../firebase/test";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { getDrinks } from "../../firebase/test";
+import { FlatList, StyleSheet, Text, View, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 
 type Drink = {
   id: string;
@@ -10,6 +11,7 @@ type Drink = {
 };
 
 const Menu = () => {
+  const router = useRouter();
   const [drinks, setDrinks] = useState<Drink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,7 +47,12 @@ const Menu = () => {
           </Text>
         }
         renderItem={({ item: drink }) => (
-          <View style={styles.drinkCard}>
+          <Pressable
+            style={styles.drinkCard}
+            onPress={() =>
+              router.push({ pathname: "drink/[id]", params: { id: drink.id } })
+            }
+          >
             <Text style={styles.drinkName}>
               {drink.name ?? "Untitled drink"}
             </Text>
@@ -57,7 +64,7 @@ const Menu = () => {
                 {drink.ingredients.join("  |  ")}
               </Text>
             ) : null}
-          </View>
+          </Pressable>
         )}
       />
     </View>
