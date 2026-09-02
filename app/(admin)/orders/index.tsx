@@ -37,7 +37,6 @@ const AdminOrders = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Active orders</Text>
       {isLoading ? <Text style={styles.empty}>Loading orders...</Text> : null}
       {!isLoading && !activeOrders.length ? (
         <Text style={styles.empty}>No active orders.</Text>
@@ -68,36 +67,30 @@ const AdminOrders = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flexGrow: 1,
     padding: 20,
     paddingTop: 32,
   },
-  title: {
-    color: "#1c2d2a",
-    fontSize: 32,
-    fontWeight: "700",
-    marginBottom: 20,
-  },
   orderCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 10,
     padding: 17,
   },
-  orderCardPressed: { backgroundColor: "#edf4ee" },
-  drinkName: { color: "#1c2d2a", fontSize: 19, fontWeight: "700" },
-  customer: { color: "#53605a", fontSize: 14, marginTop: 6 },
+  orderCardPressed: { backgroundColor: "#182b0f" },
+  drinkName: { color: "#d5d8d1", fontSize: 19, fontWeight: "700" },
+  customer: { color: "#a4aaa0", fontSize: 14, marginTop: 6 },
   message: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 14,
     fontStyle: "italic",
     lineHeight: 20,
     marginTop: 8,
   },
-  empty: { color: "#53605a", fontSize: 16 },
+  empty: { color: "#a4aaa0", fontSize: 16 },
 });
 
 export default AdminOrders;

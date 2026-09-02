@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useFocusEffect, useRouter } from "expo-router";
 import {
+  Image,
   ImageBackground,
   Pressable,
   StyleSheet,
@@ -76,9 +77,14 @@ const Home = () => {
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>THE BAR</Text>
-          <Text style={styles.subtitle}>Good drinks.</Text>
-          <Text style={styles.subtitle}>Good times.</Text>
+          <Image
+            accessibilityLabel="The Bar"
+            resizeMode="contain"
+            source={require("../../assets/bar-logo.png")}
+            style={styles.logo}
+          />
+          {/* <Text style={styles.subtitle}>Good drinks.</Text>
+          <Text style={styles.subtitle}>Good times.</Text> */}
 
           <View style={styles.actions}>
             <Pressable
@@ -201,7 +207,7 @@ const styles = StyleSheet.create({
   btn: {
     alignItems: "center",
     backgroundColor: "rgba(0, 5, 3, 0.86)",
-    borderColor: "#5f743d",
+    borderColor: "#93a688",
     borderRadius: 8,
     borderWidth: 2,
     justifyContent: "center",
@@ -213,6 +219,9 @@ const styles = StyleSheet.create({
   wheelBtn: {
     backgroundColor: "rgba(24, 43, 15, 0.9)",
     borderColor: "#698530",
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
   },
   actions: {
     marginTop: 34,
@@ -222,12 +231,11 @@ const styles = StyleSheet.create({
   pressed: {
     backgroundColor: "rgba(105, 133, 48, 0.2)",
   },
-  title: {
-    color: "#b3c2a8",
-    fontSize: 36,
-    fontWeight: "400",
-    marginBottom: 8,
-    letterSpacing: 1,
+  logo: {
+    height: 396,
+    marginBottom: -48,
+    maxWidth: "100%",
+    width: 1170,
   },
   subtitle: {
     color: "#7c7e7b",

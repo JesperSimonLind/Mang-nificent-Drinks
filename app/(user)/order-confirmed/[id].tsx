@@ -34,7 +34,7 @@ const OrderConfirmed = () => {
   if (isLoading) {
     return (
       <View style={styles.centeredState}>
-        <Text style={styles.stateText}>Bekraftar din bestallning...</Text>
+        <Text style={styles.stateText}>Bekräftar din beställning...</Text>
       </View>
     );
   }
@@ -42,7 +42,7 @@ const OrderConfirmed = () => {
   if (!drink) {
     return (
       <View style={styles.centeredState}>
-        <Text style={styles.stateText}>Din bestallning skickades.</Text>
+        <Text style={styles.stateText}>Din beställning skickades.</Text>
         <Pressable
           onPress={() => router.replace("/menu")}
           style={({ pressed }) => [
@@ -58,7 +58,7 @@ const OrderConfirmed = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.eyebrow}>Bestallning skickad</Text>
+      <Text style={styles.eyebrow}>Beställning skickad</Text>
       <Text style={styles.title}>Tack!</Text>
       <Text style={styles.subtitle}>
         Bartendern borjar med din drink snart.
@@ -92,69 +92,72 @@ const OrderConfirmed = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flex: 1,
     justifyContent: "center",
     padding: 20,
   },
   centeredState: {
     alignItems: "center",
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flex: 1,
     justifyContent: "center",
     padding: 24,
   },
   stateText: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 16,
     textAlign: "center",
   },
   eyebrow: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "700",
     textTransform: "uppercase",
   },
   title: {
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 36,
     fontWeight: "700",
     marginTop: 8,
   },
   subtitle: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 16,
     lineHeight: 23,
     marginTop: 8,
   },
   drinkCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     marginTop: 28,
     padding: 20,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.12,
+    shadowRadius: 14,
   },
   cardLabel: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "700",
     textTransform: "uppercase",
   },
   drinkName: {
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 23,
     fontWeight: "700",
     marginTop: 6,
   },
   description: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 15,
     lineHeight: 21,
     marginTop: 8,
   },
   ingredients: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "600",
     lineHeight: 20,
@@ -162,13 +165,16 @@ const styles = StyleSheet.create({
   },
   menuButton: {
     alignItems: "center",
-    backgroundColor: "#22644d",
-    borderRadius: 6,
+    backgroundColor: "#698530",
+    borderRadius: 8,
     marginTop: 28,
     paddingVertical: 16,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
   },
   menuButtonPressed: {
-    backgroundColor: "#174735",
+    backgroundColor: "#566f27",
   },
   menuButtonText: {
     color: "#ffffff",

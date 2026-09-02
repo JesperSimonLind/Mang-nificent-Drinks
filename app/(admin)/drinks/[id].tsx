@@ -37,7 +37,6 @@ const EditDrink = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Edit drink</Text>
       <DrinkForm
         initialValues={{
           name: drink.name ?? "",
@@ -55,19 +54,18 @@ const EditDrink = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flexGrow: 1,
     padding: 20,
     paddingTop: 32,
   },
   centered: {
     alignItems: "center",
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flex: 1,
     justifyContent: "center",
   },
-  title: { color: "#1c2d2a", fontSize: 30, fontWeight: "700" },
-  muted: { color: "#53605a", fontSize: 16 },
+  muted: { color: "#a4aaa0", fontSize: 16 },
 });
 
 export default EditDrink;

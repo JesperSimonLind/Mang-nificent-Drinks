@@ -1,9 +1,42 @@
+import Feather from "@expo/vector-icons/Feather";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Tabs } from "expo-router";
+import { useRouter } from "expo-router";
+import { Pressable } from "react-native";
+
+const styles = {
+  backButton: {
+    alignItems: "center" as const,
+    height: 44,
+    justifyContent: "center" as const,
+    width: 44,
+  },
+};
+
+const BackToHomeButton = () => {
+  const router = useRouter();
+
+  return (
+    <Pressable
+      accessibilityLabel="Back to home"
+      hitSlop={12}
+      style={styles.backButton}
+      onPress={() => router.navigate("/(user)")}
+    >
+      <Feather color="#b3c2a8" name="arrow-left" size={24} />
+    </Pressable>
+  );
+};
 
 const UserLayout = () => {
   return (
     <Tabs
       screenOptions={{
+        headerStyle: { backgroundColor: "#0a0a0a" },
+        headerTintColor: "#b3c2a8",
+        headerLeftContainerStyle: { paddingLeft: 12 },
+        headerTitleStyle: { color: "#d5d8d1", fontWeight: "700" },
+        headerShadowVisible: false,
         tabBarStyle: {
           backgroundColor: "#050906",
           borderTopWidth: 0,
@@ -16,11 +49,48 @@ const UserLayout = () => {
     >
       <Tabs.Screen
         name="index"
-        options={{ headerShown: false, title: "Home" }}
+        options={{
+          headerShown: false,
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Feather color={color} name="home" size={size} />
+          ),
+        }}
       />
-      <Tabs.Screen name="menu" options={{ title: "Menu" }} />
-      <Tabs.Screen name="wheel" options={{ title: "Wheel" }} />
-      <Tabs.Screen name="myorders" options={{ title: "My orders" }} />
+      <Tabs.Screen
+        name="menu"
+        options={{
+          headerLeft: () => <BackToHomeButton />,
+          title: "Drinkmeny",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              color={color}
+              name="glass-cocktail"
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="wheel"
+        options={{
+          headerLeft: () => <BackToHomeButton />,
+          title: "Wheel of destiny",
+          tabBarIcon: ({ color, size }) => (
+            <Feather color={color} name="disc" size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="myorders"
+        options={{
+          headerLeft: () => <BackToHomeButton />,
+          title: "Mina beställningar",
+          tabBarIcon: ({ color, size }) => (
+            <Feather color={color} name="clipboard" size={size} />
+          ),
+        }}
+      />
       <Tabs.Screen name="drink" options={{ href: null }} />
       <Tabs.Screen name="order" options={{ href: null }} />
       <Tabs.Screen name="order-confirmed" options={{ href: null }} />

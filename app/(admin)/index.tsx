@@ -72,7 +72,6 @@ const AdminDashboard = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
       <View style={styles.statusCard}>
         <View>
           <Text style={styles.cardLabel}>Bar status</Text>
@@ -80,8 +79,8 @@ const AdminDashboard = () => {
         </View>
         <Switch
           onValueChange={handleBarStatusChange}
-          trackColor={{ false: "#b9c5bc", true: "#83b89d" }}
-          thumbColor={isOpen ? "#22644d" : "#ffffff"}
+          trackColor={{ false: "#40522c", true: "#698530" }}
+          thumbColor={isOpen ? "#d5d8d1" : "#a4aaa0"}
           value={isOpen}
         />
       </View>
@@ -144,58 +143,66 @@ const StatCard = ({ label, value }: { label: string; value: number }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flex: 1,
     padding: 20,
     paddingTop: 32,
   },
-  title: { color: "#1c2d2a", fontSize: 32, fontWeight: "700" },
   statusCard: {
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 24,
     padding: 18,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.14,
+    shadowRadius: 12,
   },
-  cardLabel: { color: "#53605a", fontSize: 14 },
+  cardLabel: { color: "#a4aaa0", fontSize: 14 },
   statusValue: {
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 22,
     fontWeight: "700",
     marginTop: 4,
   },
   statsGrid: { flexDirection: "row", gap: 10, marginTop: 14 },
   statCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     flex: 1,
     minHeight: 112,
     padding: 14,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
-  statValue: { color: "#22644d", fontSize: 28, fontWeight: "700" },
-  statLabel: { color: "#53605a", fontSize: 13, lineHeight: 18, marginTop: 8 },
+  statValue: { color: "#93a688", fontSize: 28, fontWeight: "700" },
+  statLabel: { color: "#a4aaa0", fontSize: 13, lineHeight: 18, marginTop: 8 },
   sectionTitle: {
-    color: "#1c2d2a",
+    color: "#b3c2a8",
     fontSize: 18,
     fontWeight: "700",
     marginTop: 28,
     marginBottom: 12,
   },
   latestOrderCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     padding: 18,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
-  latestDrink: { color: "#1c2d2a", fontSize: 18, fontWeight: "700" },
-  muted: { color: "#53605a", fontSize: 15, marginTop: 5 },
+  latestDrink: { color: "#d5d8d1", fontSize: 18, fontWeight: "700" },
+  muted: { color: "#a4aaa0", fontSize: 15, marginTop: 5 },
   logoutButton: {
     alignItems: "center",
     borderColor: "#ad2c22",
@@ -204,8 +211,8 @@ const styles = StyleSheet.create({
     marginTop: 28,
     paddingVertical: 14,
   },
-  logoutPressed: { backgroundColor: "#f9e8e6" },
-  logoutText: { color: "#ad2c22", fontSize: 16, fontWeight: "700" },
+  logoutPressed: { backgroundColor: "rgba(209, 96, 84, 0.15)" },
+  logoutText: { color: "#d16054", fontSize: 16, fontWeight: "700" },
 });
 
 export default AdminDashboard;

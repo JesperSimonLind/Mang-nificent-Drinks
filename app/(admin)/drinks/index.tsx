@@ -58,7 +58,6 @@ const AdminDrinks = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Drinks</Text>
         <Pressable
           onPress={() => router.push("/(admin)/drinks/new")}
           style={({ pressed }) => [
@@ -87,8 +86,8 @@ const AdminDrinks = () => {
           <Switch
             value={drink.available === true}
             onValueChange={(value) => handleAvailabilityChange(drink, value)}
-            trackColor={{ false: "#b9c5bc", true: "#83b89d" }}
-            thumbColor={drink.available ? "#22644d" : "#ffffff"}
+            trackColor={{ false: "#40522c", true: "#698530" }}
+            thumbColor={drink.available ? "#d5d8d1" : "#a4aaa0"}
           />
         </View>
       ))}
@@ -98,7 +97,7 @@ const AdminDrinks = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flexGrow: 1,
     padding: 20,
     paddingTop: 32,
@@ -106,32 +105,34 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     marginBottom: 20,
   },
-  title: { color: "#1c2d2a", fontSize: 32, fontWeight: "700" },
   addButton: {
-    backgroundColor: "#22644d",
-    borderRadius: 6,
+    backgroundColor: "#698530",
+    borderRadius: 8,
     paddingHorizontal: 13,
     paddingVertical: 10,
   },
-  addPressed: { backgroundColor: "#174735" },
+  addPressed: { backgroundColor: "#566f27" },
   addText: { color: "#ffffff", fontSize: 14, fontWeight: "700" },
   drinkCard: {
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     flexDirection: "row",
     marginBottom: 10,
     padding: 16,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.09,
+    shadowRadius: 10,
   },
   drinkInfo: { flex: 1, marginRight: 14 },
-  name: { color: "#1c2d2a", fontSize: 18, fontWeight: "700" },
-  description: { color: "#53605a", fontSize: 14, marginTop: 5 },
-  empty: { color: "#53605a", fontSize: 16 },
+  name: { color: "#d5d8d1", fontSize: 18, fontWeight: "700" },
+  description: { color: "#a4aaa0", fontSize: 14, marginTop: 5 },
+  empty: { color: "#a4aaa0", fontSize: 16 },
 });
 
 export default AdminDrinks;

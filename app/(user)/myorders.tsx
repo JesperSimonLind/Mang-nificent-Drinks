@@ -43,8 +43,6 @@ const MyOrders = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Mina bestallningar</Text>
-
       {isLoading ? (
         <Text style={styles.stateText}>Loading orders...</Text>
       ) : null}
@@ -54,7 +52,7 @@ const MyOrders = () => {
 
       {!isLoading && !errorMessage ? (
         <>
-          <OrderSection title="Pagaende" orders={ongoingOrders} />
+          <OrderSection title="Pågående" orders={ongoingOrders} />
           <OrderSection title="Klara" orders={completedOrders} />
         </>
       ) : null}
@@ -81,7 +79,7 @@ const OrderSection = ({ title, orders }: OrderSectionProps) => {
               <Text style={styles.status}>{order.status ?? "pending"}</Text>
             </View>
             <Text style={styles.customerName}>
-              Bestalld av {order.customerName ?? "Unknown customer"}
+              Beställd av {order.customerName ?? "Okänd gäst"}
             </Text>
             {order.message ? (
               <Text style={styles.message}>{order.message}</Text>
@@ -90,9 +88,9 @@ const OrderSection = ({ title, orders }: OrderSectionProps) => {
         ))
       ) : (
         <Text style={styles.emptyText}>
-          {title === "Pagaende"
-            ? "Inga pagaende bestallningar."
-            : "Inga klara bestallningar annu."}
+          {title === "Pågående"
+            ? "Inga pågående beställningar."
+            : "Inga klara beställningar ännu."}
         </Text>
       )}
     </View>
@@ -102,31 +100,29 @@ const OrderSection = ({ title, orders }: OrderSectionProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     padding: 20,
     paddingTop: 32,
-  },
-  title: {
-    color: "#1c2d2a",
-    fontSize: 32,
-    fontWeight: "700",
   },
   section: {
     marginTop: 28,
   },
   sectionTitle: {
-    color: "#1c2d2a",
+    color: "#b3c2a8",
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 12,
   },
   orderCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 10,
     padding: 16,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.09,
+    shadowRadius: 10,
   },
   cardHeader: {
     alignItems: "center",
@@ -134,41 +130,41 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   drinkName: {
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     flex: 1,
     fontSize: 18,
     fontWeight: "700",
     marginRight: 12,
   },
   status: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "700",
     textTransform: "capitalize",
   },
   customerName: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 14,
     marginTop: 7,
   },
   message: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 14,
     fontStyle: "italic",
     lineHeight: 20,
     marginTop: 8,
   },
   emptyText: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 15,
   },
   stateText: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 16,
     marginTop: 24,
   },
   errorText: {
-    color: "#ad2c22",
+    color: "#d16054",
     fontSize: 16,
     marginTop: 24,
   },

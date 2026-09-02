@@ -90,7 +90,6 @@ const OrderDrink = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Din bestallning</Text>
       <Text style={styles.subtitle}>
         Kontrollera din drink och fyll i dina uppgifter.
       </Text>
@@ -122,7 +121,7 @@ const OrderDrink = () => {
       <TextInput
         multiline
         onChangeText={setMessage}
-        placeholder="Till exempel: utan agg (valfritt)"
+        placeholder="Till exempel: utan ägg (valfritt)"
         placeholderTextColor="#7b8780"
         style={[styles.input, styles.messageInput]}
         textAlignVertical="top"
@@ -140,7 +139,7 @@ const OrderDrink = () => {
         ]}
       >
         <Text style={styles.submitButtonText}>
-          {isSubmitting ? "Skickar..." : "Skicka bestallning"}
+          {isSubmitting ? "Skickar..." : "Skicka beställning"}
         </Text>
       </Pressable>
     </ScrollView>
@@ -149,80 +148,78 @@ const OrderDrink = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flexGrow: 1,
     padding: 20,
     paddingTop: 32,
   },
   centeredState: {
     alignItems: "center",
-    backgroundColor: "#f4f6f1",
+    backgroundColor: "#0a0a0a",
     flex: 1,
     justifyContent: "center",
     padding: 24,
   },
   stateText: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 16,
     textAlign: "center",
   },
-  title: {
-    color: "#1c2d2a",
-    fontSize: 32,
-    fontWeight: "700",
-  },
   subtitle: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 16,
     lineHeight: 23,
     marginTop: 8,
   },
   drinkCard: {
-    backgroundColor: "#ffffff",
-    borderColor: "#d7ded8",
+    backgroundColor: "#10160f",
+    borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
     marginTop: 24,
     padding: 18,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
   },
   cardLabel: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "700",
     textTransform: "uppercase",
   },
   drinkName: {
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 22,
     fontWeight: "700",
     marginTop: 6,
   },
   description: {
-    color: "#53605a",
+    color: "#a4aaa0",
     fontSize: 15,
     lineHeight: 21,
     marginTop: 8,
   },
   ingredients: {
-    color: "#22644d",
+    color: "#93a688",
     fontSize: 13,
     fontWeight: "600",
     lineHeight: 20,
     marginTop: 12,
   },
   label: {
-    color: "#1c2d2a",
+    color: "#b3c2a8",
     fontSize: 16,
     fontWeight: "700",
     marginTop: 22,
     marginBottom: 8,
   },
   input: {
-    backgroundColor: "#ffffff",
-    borderColor: "#b9c5bc",
+    backgroundColor: "#10160f",
+    borderColor: "#40522c",
     borderRadius: 6,
     borderWidth: 1,
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 16,
     paddingHorizontal: 14,
     paddingVertical: 13,
@@ -231,19 +228,22 @@ const styles = StyleSheet.create({
     height: 112,
   },
   error: {
-    color: "#ad2c22",
+    color: "#d16054",
     fontSize: 14,
     marginTop: 12,
   },
   submitButton: {
     alignItems: "center",
-    backgroundColor: "#22644d",
-    borderRadius: 6,
+    backgroundColor: "#698530",
+    borderRadius: 8,
     marginTop: 24,
     paddingVertical: 16,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
   },
   submitButtonPressed: {
-    backgroundColor: "#174735",
+    backgroundColor: "#566f27",
     opacity: 0.82,
   },
   submitButtonText: {

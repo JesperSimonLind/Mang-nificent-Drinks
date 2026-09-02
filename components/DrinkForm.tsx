@@ -78,7 +78,7 @@ const DrinkForm = ({
         value={name}
         onChangeText={setName}
         placeholder="Drink name"
-        placeholderTextColor="#7b8780"
+        placeholderTextColor="#7c7e7b"
         style={styles.input}
       />
       <Text style={styles.label}>Description</Text>
@@ -88,7 +88,7 @@ const DrinkForm = ({
         multiline
         textAlignVertical="top"
         placeholder="Describe the drink"
-        placeholderTextColor="#7b8780"
+        placeholderTextColor="#7c7e7b"
         style={[styles.input, styles.descriptionInput]}
       />
       <Text style={styles.label}>Ingredients</Text>
@@ -96,7 +96,7 @@ const DrinkForm = ({
         value={ingredients}
         onChangeText={setIngredients}
         placeholder="Gin, tonic, lime"
-        placeholderTextColor="#7b8780"
+        placeholderTextColor="#7c7e7b"
         style={styles.input}
       />
       <Text style={styles.hint}>Separate ingredients with commas.</Text>
@@ -107,7 +107,7 @@ const DrinkForm = ({
         autoCapitalize="none"
         keyboardType="url"
         placeholder="https://..."
-        placeholderTextColor="#7b8780"
+        placeholderTextColor="#7c7e7b"
         style={styles.input}
       />
       <View style={styles.availabilityRow}>
@@ -118,8 +118,8 @@ const DrinkForm = ({
         <Switch
           value={available}
           onValueChange={setAvailable}
-          trackColor={{ false: "#b9c5bc", true: "#83b89d" }}
-          thumbColor={available ? "#22644d" : "#ffffff"}
+          trackColor={{ false: "#40522c", true: "#698530" }}
+          thumbColor={available ? "#d5d8d1" : "#a4aaa0"}
         />
       </View>
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
@@ -141,40 +141,46 @@ const DrinkForm = ({
 
 const styles = StyleSheet.create({
   label: {
-    color: "#1c2d2a",
+    color: "#b3c2a8",
     fontSize: 15,
     fontWeight: "700",
     marginBottom: 8,
     marginTop: 20,
   },
-  labelInline: { color: "#1c2d2a", fontSize: 16, fontWeight: "700" },
+  labelInline: { color: "#d5d8d1", fontSize: 16, fontWeight: "700" },
   input: {
-    backgroundColor: "#ffffff",
-    borderColor: "#b9c5bc",
+    backgroundColor: "rgba(16, 22, 15, 0.94)",
+    borderColor: "#40522c",
     borderRadius: 6,
     borderWidth: 1,
-    color: "#1c2d2a",
+    color: "#d5d8d1",
     fontSize: 16,
     paddingHorizontal: 14,
     paddingVertical: 13,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
   },
   descriptionInput: { height: 100 },
-  hint: { color: "#53605a", fontSize: 13, marginTop: 7 },
+  hint: { color: "#a4aaa0", fontSize: 13, marginTop: 7 },
   availabilityRow: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 24,
   },
-  error: { color: "#ad2c22", fontSize: 14, marginTop: 16 },
+  error: { color: "#d16054", fontSize: 14, marginTop: 16 },
   submitButton: {
     alignItems: "center",
-    backgroundColor: "#22644d",
-    borderRadius: 6,
+    backgroundColor: "#698530",
+    borderRadius: 8,
     marginTop: 26,
     paddingVertical: 16,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
   },
-  submitPressed: { backgroundColor: "#174735", opacity: 0.8 },
+  submitPressed: { backgroundColor: "#566f27", opacity: 0.8 },
   submitText: { color: "#ffffff", fontSize: 17, fontWeight: "700" },
 });
 
