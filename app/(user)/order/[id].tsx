@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { createOrder, getDrinkById } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -92,67 +93,70 @@ const OrderDrink = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.drinkCard}>
-        {drink.imageUrl ? (
-          <Image source={{ uri: drink.imageUrl }} style={styles.drinkImage} />
-        ) : (
-          <View style={styles.drinkImagePlaceholder}>
-            <MaterialCommunityIcons
-              color="#ffbe55"
-              name="glass-cocktail"
-              size={28}
-            />
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.drinkCard}>
+          {drink.imageUrl ? (
+            <Image source={{ uri: drink.imageUrl }} style={styles.drinkImage} />
+          ) : (
+            <View style={styles.drinkImagePlaceholder}>
+              <MaterialCommunityIcons
+                color="#ffbe55"
+                name="glass-cocktail"
+                size={28}
+              />
+            </View>
+          )}
+          <View style={styles.drinkInfo}>
+            <Text style={styles.cardLabel}>Din drink</Text>
+            <Text style={styles.drinkName}>{drink.name ?? "Okänd drink"}</Text>
           </View>
-        )}
-        <View style={styles.drinkInfo}>
-          <Text style={styles.cardLabel}>Din drink</Text>
-          <Text style={styles.drinkName}>{drink.name ?? "Okänd drink"}</Text>
         </View>
-      </View>
 
-      <Text style={styles.label}>Ditt namn</Text>
-      <TextInput
-        autoCapitalize="words"
-        onChangeText={setCustomerName}
-        placeholder="Skriv ditt namn"
-        placeholderTextColor="#7b8780"
-        style={styles.input}
-        value={customerName}
-      />
+        <Text style={styles.label}>Ditt namn</Text>
+        <TextInput
+          autoCapitalize="words"
+          onChangeText={setCustomerName}
+          placeholder="Skriv ditt namn"
+          placeholderTextColor="#7b8780"
+          style={styles.input}
+          value={customerName}
+        />
 
-      <Text style={styles.label}>Meddelande till bartendern (valfritt)</Text>
-      <TextInput
-        multiline
-        onChangeText={setMessage}
-        placeholder="Till exempel: utan ägg (valfritt)"
-        placeholderTextColor="#7b8780"
-        style={[styles.input, styles.messageInput]}
-        textAlignVertical="top"
-        value={message}
-      />
+        <Text style={styles.label}>Meddelande till bartendern (valfritt)</Text>
+        <TextInput
+          multiline
+          onChangeText={setMessage}
+          placeholder="Till exempel: utan ägg (valfritt)"
+          placeholderTextColor="#7b8780"
+          style={[styles.input, styles.messageInput]}
+          textAlignVertical="top"
+          value={message}
+        />
 
-      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
 
-      <View style={styles.footer}>
-        <Pressable
-          disabled={isSubmitting}
-          onPress={handleSubmitOrder}
-          style={({ pressed }) => [
-            styles.submitButton,
-            (pressed || isSubmitting) && styles.submitButtonPressed,
-          ]}
-        >
-          <Text style={styles.submitButtonText}>
-            {isSubmitting ? "SKICKAR..." : "SKICKA BESTÄLLNING"}
-          </Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+        <View style={styles.footer}>
+          <Pressable
+            disabled={isSubmitting}
+            onPress={handleSubmitOrder}
+            style={({ pressed }) => [
+              styles.submitButton,
+              (pressed || isSubmitting) && styles.submitButtonPressed,
+            ]}
+          >
+            <Text style={styles.submitButtonText}>
+              {isSubmitting ? "SKICKAR..." : "SKICKA BESTÄLLNING"}
+            </Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,

@@ -29,15 +29,19 @@ const AdminLayout = () => {
         headerShadowVisible: false,
         headerStyle: { backgroundColor: "#0a0a0a" },
         headerTintColor: "#b3c2a8",
-        headerTitleStyle: { color: "#d5d8d1", fontWeight: "700" },
+        headerTitleAlign: "center",
+        headerTitleStyle: { color: "#d5d8d1", fontSize: 16, fontWeight: "700" },
         tabBarActiveTintColor: "#93a688",
         tabBarInactiveTintColor: "#7c7e7b",
+        freezeOnBlur: true,
+        sceneStyle: { backgroundColor: "#0a0a0a" },
         tabBarStyle: {
           backgroundColor: "#050906",
           borderTopWidth: 0,
           elevation: 0,
           shadowColor: "transparent",
         },
+        tabBarLabelStyle: { fontSize: 11, fontWeight: "600" },
       }}
     >
       <Tabs.Screen

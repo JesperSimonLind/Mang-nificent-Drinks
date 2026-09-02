@@ -2,7 +2,9 @@ import { useCallback, useState } from "react";
 import Feather from "@expo/vector-icons/Feather";
 import { useFocusEffect, useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getOrders } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Order = {
   id: string;
@@ -15,6 +17,7 @@ type Order = {
 
 const AdminOrders = () => {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,74 +41,82 @@ const AdminOrders = () => {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.queueHeader}>
-        <View>
-          <Text style={styles.eyebrow}>BARTENDERKÖ</Text>
-          <Text style={styles.queueTitle}>AKTIVA BESTÄLLNINGAR</Text>
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { paddingTop: insets.top + 18 },
+        ]}
+      >
+        <View style={styles.queueHeader}>
+          <View>
+            <Text style={styles.eyebrow}>BARTENDERKÖ</Text>
+            <Text style={styles.queueTitle}>AKTIVA BESTÄLLNINGAR</Text>
+          </View>
+          <View style={styles.orderCount}>
+            <Text style={styles.orderCountText}>{activeOrders.length}</Text>
+          </View>
         </View>
-        <View style={styles.orderCount}>
-          <Text style={styles.orderCountText}>{activeOrders.length}</Text>
-        </View>
-      </View>
 
-      {isLoading ? (
-        <Text style={styles.empty}>Laddar beställningar...</Text>
-      ) : null}
-      {!isLoading && !activeOrders.length ? (
-        <View style={styles.emptyState}>
-          <Feather color="#6a756e" name="coffee" size={30} />
-          <Text style={styles.empty}>Inga aktiva beställningar.</Text>
-        </View>
-      ) : null}
-      {activeOrders.map((order) => (
-        <Pressable
-          key={order.id}
-          onPress={() => router.push(`/(admin)/orders/${order.id}`)}
-          style={({ pressed }) => [
-            styles.orderCard,
-            pressed && styles.orderCardPressed,
-          ]}
-        >
-          <View style={styles.orderNumber}>
-            <Text style={styles.orderNumberText}>
-              {order.orderNumber
-                ? String(order.orderNumber).padStart(2, "0")
-                : "--"}
-            </Text>
+        {isLoading ? (
+          <Text style={styles.empty}>Laddar beställningar...</Text>
+        ) : null}
+        {!isLoading && !activeOrders.length ? (
+          <View style={styles.emptyState}>
+            <Feather color="#6a756e" name="coffee" size={30} />
+            <Text style={styles.empty}>Inga aktiva beställningar.</Text>
           </View>
-          <View style={styles.orderContent}>
-            <View style={styles.orderTopRow}>
-              <Text style={styles.drinkName}>
-                {order.drinkName ?? "Okänd drink"}
+        ) : null}
+        {activeOrders.map((order) => (
+          <Pressable
+            key={order.id}
+            onPress={() => router.push(`/(admin)/orders/${order.id}`)}
+            style={({ pressed }) => [
+              styles.orderCard,
+              pressed && styles.orderCardPressed,
+            ]}
+          >
+            <View style={styles.orderNumber}>
+              <Text style={styles.orderNumberText}>
+                {order.orderNumber
+                  ? String(order.orderNumber).padStart(2, "0")
+                  : "--"}
               </Text>
-              <View style={styles.statusBadge}>
-                <View style={styles.statusDot} />
-                <Text style={styles.statusText}>
-                  {order.status === "in-progress" ? "PÅGÅR" : "NY"}
-                </Text>
-              </View>
             </View>
-            <Text style={styles.customer}>
-              {order.customerName ?? "Okänd gäst"}
-            </Text>
-            {order.message ? (
-              <View style={styles.noteRow}>
-                <Feather color="#ffbe55" name="message-square" size={12} />
-                <Text numberOfLines={1} style={styles.message}>
-                  {order.message}
+            <View style={styles.orderContent}>
+              <View style={styles.orderTopRow}>
+                <Text style={styles.drinkName}>
+                  {order.drinkName ?? "Okänd drink"}
                 </Text>
+                <View style={styles.statusBadge}>
+                  <View style={styles.statusDot} />
+                  <Text style={styles.statusText}>
+                    {order.status === "in-progress" ? "PÅGÅR" : "NY"}
+                  </Text>
+                </View>
               </View>
-            ) : null}
-          </View>
-          <Feather color="#8bcf1d" name="chevron-right" size={20} />
-        </Pressable>
-      ))}
-    </ScrollView>
+              <Text style={styles.customer}>
+                {order.customerName ?? "Okänd gäst"}
+              </Text>
+              {order.message ? (
+                <View style={styles.noteRow}>
+                  <Feather color="#ffbe55" name="message-square" size={12} />
+                  <Text numberOfLines={1} style={styles.message}>
+                    {order.message}
+                  </Text>
+                </View>
+              ) : null}
+            </View>
+            <Feather color="#8bcf1d" name="chevron-right" size={20} />
+          </Pressable>
+        ))}
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,

@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 import { useRouter } from "expo-router";
+import ScreenEntrance from "../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -53,7 +54,7 @@ const Menu = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <FlatList
         data={filteredDrinks}
         keyExtractor={(drink) => drink.id}
@@ -135,7 +136,7 @@ const Menu = () => {
           </Pressable>
         )}
       />
-    </View>
+    </ScreenEntrance>
   );
 };
 

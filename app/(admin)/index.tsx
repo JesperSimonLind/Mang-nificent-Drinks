@@ -9,6 +9,7 @@ import {
   getOrders,
   setBarStatus,
 } from "../../firebase/test";
+import ScreenEntrance from "../../components/ScreenEntrance";
 
 type Order = {
   completedAt?: { toDate?: () => Date };
@@ -78,7 +79,7 @@ const AdminDashboard = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <View style={styles.statusCard}>
         <View>
           <Text style={styles.cardLabel}>BAREN ÄR</Text>
@@ -152,7 +153,7 @@ const AdminDashboard = () => {
         <Feather color="#d16054" name="log-out" size={17} />
         <Text style={styles.logoutButtonText}>LOGGA UT</Text>
       </Pressable>
-    </View>
+    </ScreenEntrance>
   );
 };
 

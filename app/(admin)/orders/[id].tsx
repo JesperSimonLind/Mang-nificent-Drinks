@@ -8,6 +8,7 @@ import {
   getOrderById,
   updateOrderStatus,
 } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Order = {
   id: string;
@@ -66,7 +67,7 @@ const AdminOrderDetails = () => {
     );
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <Stack.Screen
         options={{
           headerLeft: () => (
@@ -79,7 +80,6 @@ const AdminOrderDetails = () => {
               <Feather color="#b3c2a8" name="arrow-left" size={22} />
             </Pressable>
           ),
-          headerLeftContainerStyle: { paddingLeft: 12 },
           title: order.orderNumber ? `ORDER #${order.orderNumber}` : "ORDER",
         }}
       />
@@ -138,7 +138,7 @@ const AdminOrderDetails = () => {
           <Text style={styles.cancelText}>AVBRYT ORDER</Text>
         </Pressable>
       </View>
-    </View>
+    </ScreenEntrance>
   );
 };
 
@@ -160,7 +160,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 44,
     justifyContent: "center",
+    marginLeft: 3,
     width: 44,
+    marginBottom: 5,
   },
   orderCard: {
     alignItems: "center",

@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { getDrinkById } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -60,7 +61,7 @@ const OrderConfirmed = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <View style={styles.content}>
         <View style={styles.successHalo}>
           <View style={styles.successIcon}>
@@ -101,7 +102,7 @@ const OrderConfirmed = () => {
           <Text style={styles.menuButtonText}>TILLBAKA TILL MENYN</Text>
         </Pressable>
       </View>
-    </View>
+    </ScreenEntrance>
   );
 };
 

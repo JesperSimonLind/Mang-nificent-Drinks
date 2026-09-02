@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { getDrinkById } from "../../../../firebase/test";
+import ScreenEntrance from "../../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -49,7 +50,7 @@ const WheelResult = () => {
     );
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <Text style={styles.eyebrow}>Du fick</Text>
       <Text style={styles.title}>{drink.name ?? "a drink"}</Text>
       {drink.imageUrl ? (
@@ -84,7 +85,7 @@ const WheelResult = () => {
       >
         <Text style={styles.secondaryButtonText}>Spin again</Text>
       </Pressable>
-    </View>
+    </ScreenEntrance>
   );
 };
 

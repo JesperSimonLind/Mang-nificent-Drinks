@@ -50,8 +50,11 @@ const UserLayout = () => {
         headerStyle: { backgroundColor: "#0a0a0a" },
         headerTintColor: "#b3c2a8",
         headerLeftContainerStyle: { paddingLeft: 12 },
-        headerTitleStyle: { color: "#d5d8d1", fontWeight: "700" },
+        headerTitleAlign: "center",
+        headerTitleStyle: { color: "#d5d8d1", fontSize: 16, fontWeight: "700" },
         headerShadowVisible: false,
+        freezeOnBlur: true,
+        sceneStyle: { backgroundColor: "#0a0a0a" },
         tabBarStyle: {
           backgroundColor: "#050906",
           borderTopWidth: 0,
@@ -60,6 +63,7 @@ const UserLayout = () => {
         },
         tabBarActiveTintColor: "#93a688",
         tabBarInactiveTintColor: "#7c7e7b",
+        tabBarLabelStyle: { fontSize: 11, fontWeight: "600" },
       }}
     >
       <Tabs.Screen
@@ -114,8 +118,11 @@ const UserLayout = () => {
           title: "",
         }}
       />
-      <Tabs.Screen name="order" options={{ href: null }} />
-      <Tabs.Screen name="order-confirmed" options={{ href: null }} />
+      <Tabs.Screen name="order" options={{ href: null, headerShown: false }} />
+      <Tabs.Screen
+        name="order-confirmed"
+        options={{ href: null, headerShown: false }}
+      />
       <Tabs.Screen name="admin" options={{ href: null, headerShown: false }} />
     </Tabs>
   );

@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getDrinks, setDrinkAvailability } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -62,72 +63,78 @@ const AdminDrinks = () => {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={[
-        styles.container,
-        { paddingTop: insets.top + 10 },
-      ]}
-    >
-      <View style={styles.header}>
-        <Pressable
-          accessibilityLabel="Tillbaka till översikten"
-          hitSlop={12}
-          onPress={() => router.replace("/(admin)")}
-          style={styles.headerIconButton}
-        >
-          <Feather color="#b3c2a8" name="arrow-left" size={21} />
-        </Pressable>
-        <Text style={styles.title}>DRINKAR</Text>
-        <Pressable
-          accessibilityLabel="Ny drink"
-          onPress={() => router.push("/(admin)/drinks/new")}
-          style={({ pressed }) => [
-            styles.addButton,
-            pressed && styles.addPressed,
-          ]}
-        >
-          <Feather color="#d9ff8c" name="plus" size={20} />
-        </Pressable>
-      </View>
-      {isLoading ? <Text style={styles.empty}>Loading drinks...</Text> : null}
-      {!isLoading && !drinks.length ? (
-        <Text style={styles.empty}>Inga drinkar ännu.</Text>
-      ) : null}
-      {drinks.map((drink) => (
-        <View key={drink.id} style={styles.drinkCard}>
-          {drink.imageUrl ? (
-            <Image source={{ uri: drink.imageUrl }} style={styles.drinkImage} />
-          ) : (
-            <View style={styles.drinkImagePlaceholder}>
-              <MaterialCommunityIcons
-                color="#ffbe55"
-                name="glass-cocktail"
-                size={25}
-              />
-            </View>
-          )}
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { paddingTop: insets.top + 10 },
+        ]}
+      >
+        <View style={styles.header}>
           <Pressable
-            onPress={() => router.push(`/(admin)/drinks/${drink.id}`)}
-            style={styles.drinkInfo}
+            accessibilityLabel="Tillbaka till översikten"
+            hitSlop={12}
+            onPress={() => router.replace("/(admin)")}
+            style={styles.headerIconButton}
           >
-            <Text style={styles.name}>{drink.name ?? "Untitled drink"}</Text>
-            <Text style={styles.description} numberOfLines={1}>
-              {drink.description || "Ingen beskrivning"}
-            </Text>
+            <Feather color="#b3c2a8" name="arrow-left" size={21} />
           </Pressable>
-          <Switch
-            value={drink.available === true}
-            onValueChange={(value) => handleAvailabilityChange(drink, value)}
-            trackColor={{ false: "#40522c", true: "#698530" }}
-            thumbColor={drink.available ? "#d5d8d1" : "#a4aaa0"}
-          />
+          <Text style={styles.title}>DRINKAR</Text>
+          <Pressable
+            accessibilityLabel="Ny drink"
+            onPress={() => router.push("/(admin)/drinks/new")}
+            style={({ pressed }) => [
+              styles.addButton,
+              pressed && styles.addPressed,
+            ]}
+          >
+            <Feather color="#d9ff8c" name="plus" size={20} />
+          </Pressable>
         </View>
-      ))}
-    </ScrollView>
+        {isLoading ? <Text style={styles.empty}>Loading drinks...</Text> : null}
+        {!isLoading && !drinks.length ? (
+          <Text style={styles.empty}>Inga drinkar ännu.</Text>
+        ) : null}
+        {drinks.map((drink) => (
+          <View key={drink.id} style={styles.drinkCard}>
+            {drink.imageUrl ? (
+              <Image
+                source={{ uri: drink.imageUrl }}
+                style={styles.drinkImage}
+              />
+            ) : (
+              <View style={styles.drinkImagePlaceholder}>
+                <MaterialCommunityIcons
+                  color="#ffbe55"
+                  name="glass-cocktail"
+                  size={25}
+                />
+              </View>
+            )}
+            <Pressable
+              onPress={() => router.push(`/(admin)/drinks/${drink.id}`)}
+              style={styles.drinkInfo}
+            >
+              <Text style={styles.name}>{drink.name ?? "Untitled drink"}</Text>
+              <Text style={styles.description} numberOfLines={1}>
+                {drink.description || "Ingen beskrivning"}
+              </Text>
+            </Pressable>
+            <Switch
+              value={drink.available === true}
+              onValueChange={(value) => handleAvailabilityChange(drink, value)}
+              trackColor={{ false: "#40522c", true: "#698530" }}
+              thumbColor={drink.available ? "#d5d8d1" : "#a4aaa0"}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,

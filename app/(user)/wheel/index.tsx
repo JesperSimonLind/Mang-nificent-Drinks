@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { getDrinks } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -95,7 +96,7 @@ const Wheel = () => {
   const featuredIndex = Math.floor(drinks.length / 4);
 
   return (
-    <View style={styles.container}>
+    <ScreenEntrance style={styles.container}>
       <Text style={styles.subtitle}>Snurra hjulet och låt ödet välja.</Text>
 
       <View style={styles.wheelArea}>
@@ -187,7 +188,7 @@ const Wheel = () => {
         <Text style={styles.message}>There are no available drinks yet.</Text>
       ) : null}
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-    </View>
+    </ScreenEntrance>
   );
 };
 

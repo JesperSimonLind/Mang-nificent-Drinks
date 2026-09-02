@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getBarStatus } from "../../firebase/test";
+import ScreenEntrance from "../../components/ScreenEntrance";
 
 const Home = () => {
   const router = useRouter();
@@ -78,7 +79,7 @@ const Home = () => {
           </View>
         </View>
 
-        <View style={styles.content}>
+        <ScreenEntrance style={styles.content}>
           <Image
             accessibilityLabel="The Bar"
             resizeMode="contain"
@@ -116,7 +117,7 @@ const Home = () => {
               </View>
             </Pressable>
           </View>
-        </View>
+        </ScreenEntrance>
       </View>
     </ImageBackground>
   );

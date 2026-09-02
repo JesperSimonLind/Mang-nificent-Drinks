@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { getDrinkById } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = {
   id: string;
@@ -53,59 +54,62 @@ const DrinkDetails = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {drink.imageUrl ? (
-        <Image source={{ uri: drink.imageUrl }} style={styles.image} />
-      ) : (
-        <View style={styles.imagePlaceholder}>
-          <MaterialCommunityIcons
-            color="#ffbe55"
-            name="glass-cocktail"
-            size={68}
-          />
-        </View>
-      )}
-
-      <View style={styles.content}>
-        <Text style={styles.name}>{drink.name ?? "Okänd drink"}</Text>
-        <Text style={styles.description}>{drink.description}</Text>
-
-        <Text style={styles.sectionTitle}>INGREDIENSER</Text>
-        {drink.ingredients?.length ? (
-          <View style={styles.ingredientsList}>
-            {drink.ingredients.map((ingredient) => (
-              <View key={ingredient} style={styles.ingredientRow}>
-                <View style={styles.ingredientMarker} />
-                <Text style={styles.ingredient}>{ingredient}</Text>
-              </View>
-            ))}
-          </View>
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {drink.imageUrl ? (
+          <Image source={{ uri: drink.imageUrl }} style={styles.image} />
         ) : (
-          <Text style={styles.noIngredients}>Inga ingredienser angivna.</Text>
+          <View style={styles.imagePlaceholder}>
+            <MaterialCommunityIcons
+              color="#ffbe55"
+              name="glass-cocktail"
+              size={68}
+            />
+          </View>
         )}
-      </View>
 
-      <View style={styles.footer}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.orderButton,
-            pressed && styles.orderButtonPressed,
-          ]}
-          onPress={() =>
-            router.push({
-              pathname: "/order/[id]",
-              params: { id: drink.id },
-            })
-          }
-        >
-          <Text style={styles.orderButtonText}>BESTÄLL DEN HÄR</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+        <View style={styles.content}>
+          <Text style={styles.name}>{drink.name ?? "Okänd drink"}</Text>
+          <Text style={styles.description}>{drink.description}</Text>
+
+          <Text style={styles.sectionTitle}>INGREDIENSER</Text>
+          {drink.ingredients?.length ? (
+            <View style={styles.ingredientsList}>
+              {drink.ingredients.map((ingredient) => (
+                <View key={ingredient} style={styles.ingredientRow}>
+                  <View style={styles.ingredientMarker} />
+                  <Text style={styles.ingredient}>{ingredient}</Text>
+                </View>
+              ))}
+            </View>
+          ) : (
+            <Text style={styles.noIngredients}>Inga ingredienser angivna.</Text>
+          )}
+        </View>
+
+        <View style={styles.footer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.orderButton,
+              pressed && styles.orderButtonPressed,
+            ]}
+            onPress={() =>
+              router.push({
+                pathname: "/order/[id]",
+                params: { id: drink.id },
+              })
+            }
+          >
+            <Text style={styles.orderButtonText}>BESTÄLL DEN HÄR</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,

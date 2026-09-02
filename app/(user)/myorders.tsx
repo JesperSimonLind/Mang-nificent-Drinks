@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { getOrders } from "../../firebase/test";
+import ScreenEntrance from "../../components/ScreenEntrance";
 
 type Order = {
   id: string;
@@ -42,21 +43,23 @@ const MyOrders = () => {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {isLoading ? (
-        <Text style={styles.stateText}>Loading orders...</Text>
-      ) : null}
-      {errorMessage ? (
-        <Text style={styles.errorText}>{errorMessage}</Text>
-      ) : null}
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {isLoading ? (
+          <Text style={styles.stateText}>Loading orders...</Text>
+        ) : null}
+        {errorMessage ? (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        ) : null}
 
-      {!isLoading && !errorMessage ? (
-        <>
-          <OrderSection title="Pågående" orders={ongoingOrders} />
-          <OrderSection title="Klara" orders={completedOrders} />
-        </>
-      ) : null}
-    </ScrollView>
+        {!isLoading && !errorMessage ? (
+          <>
+            <OrderSection title="Pågående" orders={ongoingOrders} />
+            <OrderSection title="Klara" orders={completedOrders} />
+          </>
+        ) : null}
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
@@ -98,6 +101,7 @@ const OrderSection = ({ title, orders }: OrderSectionProps) => {
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     flex: 1,
     backgroundColor: "#0a0a0a",

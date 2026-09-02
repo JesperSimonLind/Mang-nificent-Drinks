@@ -4,6 +4,9 @@ const WheelLayout = () => {
   return (
     <Stack
       screenOptions={{
+        animation: "fade",
+        animationDuration: 220,
+        animationMatchesGesture: true,
         contentStyle: { backgroundColor: "#0a0a0a" },
         headerBackButtonDisplayMode: "minimal",
         headerBackTitleVisible: false,

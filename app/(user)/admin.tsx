@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import ScreenEntrance from "../../components/ScreenEntrance";
 
 const AdminLogin = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const AdminLogin = () => {
           <View style={styles.fadeMedium} />
           <View style={styles.fadeLight} />
         </View>
-        <View style={styles.form}>
+        <ScreenEntrance style={styles.form}>
           <Text style={styles.eyebrow}>MAG-NIFICENT DRINKS / ADMIN</Text>
           <Text style={styles.title}>ADMININLOGGNING</Text>
           <Text style={styles.subtitle}>
@@ -81,7 +82,7 @@ const AdminLogin = () => {
           >
             <Text style={styles.loginButtonText}>LOGGA IN</Text>
           </Pressable>
-        </View>
+        </ScreenEntrance>
       </View>
     </ImageBackground>
   );

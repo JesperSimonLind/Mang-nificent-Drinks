@@ -3,6 +3,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import DrinkForm, { DrinkValues } from "../../../components/DrinkForm";
 import { getDrinkById, updateDrink } from "../../../firebase/test";
+import ScreenEntrance from "../../../components/ScreenEntrance";
 
 type Drink = Partial<DrinkValues> & { id: string };
 
@@ -36,23 +37,26 @@ const EditDrink = () => {
     );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <DrinkForm
-        initialValues={{
-          name: drink.name ?? "",
-          description: drink.description ?? "",
-          ingredients: drink.ingredients ?? [],
-          available: drink.available ?? true,
-          imageUrl: drink.imageUrl ?? "",
-        }}
-        onSubmit={handleSave}
-        submitLabel="Spara"
-      />
-    </ScrollView>
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <DrinkForm
+          initialValues={{
+            name: drink.name ?? "",
+            description: drink.description ?? "",
+            ingredients: drink.ingredients ?? [],
+            available: drink.available ?? true,
+            imageUrl: drink.imageUrl ?? "",
+          }}
+          onSubmit={handleSave}
+          submitLabel="Spara"
+        />
+      </ScrollView>
+    </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,

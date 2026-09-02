@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAwd-2xPTI4acwEBRVEJoaXkpgW-zTBO0Q",
-  authDomain: "mag-nificent-drinks.firebaseapp.com",
-  projectId: "mag-nificent-drinks",
-  storageBucket: "mag-nificent-drinks.firebasestorage.app",
-  messagingSenderId: "631310207043",
-  appId: "1:631310207043:web:ad49ad0157f7758469acf6",
-  measurementId: "G-BL2D5EY983",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
