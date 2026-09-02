@@ -46,7 +46,7 @@ const EditDrink = () => {
           imageUrl: drink.imageUrl ?? "",
         }}
         onSubmit={handleSave}
-        submitLabel="Save changes"
+        submitLabel="Spara"
       />
     </ScrollView>
   );
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0a0a0a",
     flexGrow: 1,
     padding: 20,
-    paddingTop: 32,
+    paddingTop: 16,
   },
   centered: {
     alignItems: "center",

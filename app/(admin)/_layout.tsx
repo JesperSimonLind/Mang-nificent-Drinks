@@ -52,6 +52,7 @@ const AdminLayout = () => {
       <Tabs.Screen
         name="orders"
         options={{
+          headerShown: false,
           title: "Orders",
           tabBarIcon: ({ color, size }) => (
             <Feather color={color} name="clipboard" size={size} />
@@ -61,6 +62,7 @@ const AdminLayout = () => {
       <Tabs.Screen
         name="drinks"
         options={{
+          headerShown: false,
           title: "Drinks",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons

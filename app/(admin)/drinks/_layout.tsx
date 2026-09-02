@@ -5,6 +5,8 @@ const AdminDrinksLayout = () => {
     <Stack
       screenOptions={{
         contentStyle: { backgroundColor: "#0a0a0a" },
+        headerBackButtonDisplayMode: "minimal",
+        headerBackTitleVisible: false,
         headerShadowVisible: false,
         headerStyle: { backgroundColor: "#0a0a0a" },
         headerTintColor: "#b3c2a8",
@@ -12,8 +14,8 @@ const AdminDrinksLayout = () => {
       }}
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="new" options={{ title: "New drink" }} />
-      <Stack.Screen name="[id]" options={{ title: "Edit drink" }} />
+      <Stack.Screen name="new" options={{ title: "Ny drink" }} />
+      <Stack.Screen name="[id]" options={{ title: "Redigera Drink" }} />
     </Stack>
   );
 };

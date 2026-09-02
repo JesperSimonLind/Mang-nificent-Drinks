@@ -28,6 +28,21 @@ const BackToHomeButton = () => {
   );
 };
 
+const BackToMenuButton = () => {
+  const router = useRouter();
+
+  return (
+    <Pressable
+      accessibilityLabel="Tillbaka till drinkmenyn"
+      hitSlop={12}
+      onPress={() => router.replace("/menu")}
+      style={styles.backButton}
+    >
+      <Feather color="#b3c2a8" name="arrow-left" size={24} />
+    </Pressable>
+  );
+};
+
 const UserLayout = () => {
   return (
     <Tabs
@@ -91,7 +106,14 @@ const UserLayout = () => {
           ),
         }}
       />
-      <Tabs.Screen name="drink" options={{ href: null }} />
+      <Tabs.Screen
+        name="drink"
+        options={{
+          headerLeft: () => <BackToMenuButton />,
+          href: null,
+          title: "",
+        }}
+      />
       <Tabs.Screen name="order" options={{ href: null }} />
       <Tabs.Screen name="order-confirmed" options={{ href: null }} />
       <Tabs.Screen name="admin" options={{ href: null, headerShown: false }} />

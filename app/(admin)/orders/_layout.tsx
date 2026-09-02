@@ -5,6 +5,8 @@ const AdminOrdersLayout = () => {
     <Stack
       screenOptions={{
         contentStyle: { backgroundColor: "#0a0a0a" },
+        headerBackButtonDisplayMode: "minimal",
+        headerBackTitleVisible: false,
         headerShadowVisible: false,
         headerStyle: { backgroundColor: "#0a0a0a" },
         headerTintColor: "#b3c2a8",

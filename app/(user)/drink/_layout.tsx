@@ -5,13 +5,10 @@ const DrinkLayout = () => {
     <Stack
       screenOptions={{
         contentStyle: { backgroundColor: "#0a0a0a" },
-        headerShadowVisible: false,
-        headerStyle: { backgroundColor: "#0a0a0a" },
-        headerTintColor: "#b3c2a8",
-        headerTitleStyle: { color: "#d5d8d1", fontWeight: "700" },
+        headerShown: false,
       }}
     >
-      <Stack.Screen name="[id]" options={{ title: "Drink" }} />
+      <Stack.Screen name="[id]" />
     </Stack>
   );
 };

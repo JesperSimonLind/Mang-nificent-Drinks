@@ -6,6 +6,7 @@ import {
   getDocs,
   orderBy,
   query,
+  runTransaction,
   serverTimestamp,
   setDoc,
   updateDoc,
@@ -70,13 +71,27 @@ export async function createOrder({
   customerName,
   message,
 }: CreateOrderInput) {
-  await addDoc(collection(db, "orders"), {
-    drinkId,
-    drinkName,
-    customerName,
-    message,
-    status: "pending",
-    createdAt: serverTimestamp(),
+  const counterReference = doc(db, "settings", "order-counter");
+  const orderReference = doc(collection(db, "orders"));
+
+  await runTransaction(db, async (transaction) => {
+    const counterSnapshot = await transaction.get(counterReference);
+    const orderNumber = (counterSnapshot.data()?.lastOrderNumber ?? 0) + 1;
+
+    transaction.set(
+      counterReference,
+      { lastOrderNumber: orderNumber },
+      { merge: true },
+    );
+    transaction.set(orderReference, {
+      drinkId,
+      drinkName,
+      customerName,
+      message,
+      orderNumber,
+      status: "pending",
+      createdAt: serverTimestamp(),
+    });
   });
 }
 

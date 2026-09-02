@@ -47,13 +47,13 @@ const AdminLogin = () => {
           <View style={styles.fadeLight} />
         </View>
         <View style={styles.form}>
-          <Text style={styles.eyebrow}>THE BAR</Text>
-          <Text style={styles.title}>Admin login</Text>
+          <Text style={styles.eyebrow}>MAG-NIFICENT DRINKS / ADMIN</Text>
+          <Text style={styles.title}>ADMININLOGGNING</Text>
           <Text style={styles.subtitle}>
-            Enter the shared PIN to manage the bar.
+            Ange PIN-koden för att administrera baren.
           </Text>
 
-          <Text style={styles.label}>PIN code</Text>
+          <Text style={styles.label}>PIN-KOD</Text>
           <TextInput
             autoComplete="one-time-code"
             keyboardType="number-pad"
@@ -61,7 +61,7 @@ const AdminLogin = () => {
               setPin(value);
               setErrorMessage("");
             }}
-            placeholder="Enter PIN"
+            placeholder="Ange PIN-kod"
             placeholderTextColor="#7c7e7b"
             secureTextEntry
             style={styles.input}
@@ -79,7 +79,7 @@ const AdminLogin = () => {
               pressed && styles.loginButtonPressed,
             ]}
           >
-            <Text style={styles.loginButtonText}>Log in</Text>
+            <Text style={styles.loginButtonText}>LOGGA IN</Text>
           </Pressable>
         </View>
       </View>
@@ -122,65 +122,78 @@ const styles = StyleSheet.create({
     height: 12,
   },
   form: {
-    backgroundColor: "rgba(0, 7, 3, 0.9)",
-    borderColor: "#40522c",
+    alignSelf: "center",
+    backgroundColor: "rgba(12, 21, 17, 0.94)",
+    borderColor: "#334229",
     borderRadius: 8,
-    borderWidth: 2,
-    padding: 22,
+    borderWidth: 1,
+    maxWidth: 420,
+    padding: 20,
+    width: "100%",
   },
   eyebrow: {
     color: "#93a688",
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "700",
-    letterSpacing: 1,
-    marginBottom: 8,
+    letterSpacing: 0.5,
+    marginBottom: 10,
   },
   title: {
     color: "#d5d8d1",
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: "700",
+    letterSpacing: 0.3,
   },
   subtitle: {
-    color: "#a4aaa0",
-    fontSize: 16,
-    marginTop: 8,
+    color: "#87908c",
+    fontSize: 13,
+    lineHeight: 19,
+    marginTop: 10,
   },
   label: {
-    color: "#b3c2a8",
-    fontSize: 15,
+    color: "#87908c",
+    fontSize: 11,
     fontWeight: "700",
-    marginBottom: 8,
-    marginTop: 20,
+    letterSpacing: 0.4,
+    marginBottom: 7,
+    marginTop: 22,
   },
   input: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderColor: "#5f743d",
-    borderRadius: 6,
+    backgroundColor: "rgba(16, 22, 15, 0.94)",
+    borderColor: "#40522c",
+    borderRadius: 5,
     borderWidth: 1,
     color: "#d5d8d1",
-    fontSize: 16,
-    paddingHorizontal: 14,
-    paddingVertical: 13,
+    fontSize: 14,
+    height: 48,
+    paddingHorizontal: 12,
   },
   error: {
-    color: "#ad2c22",
-    fontSize: 14,
-    marginTop: 12,
+    color: "#d16054",
+    fontSize: 13,
+    marginTop: 14,
   },
   loginButton: {
     alignItems: "center",
     backgroundColor: "#698530",
-    borderRadius: 8,
-    marginTop: 26,
-    paddingVertical: 15,
+    borderColor: "#9eea32",
+    borderRadius: 7,
+    borderWidth: 1,
+    height: 52,
+    justifyContent: "center",
+    marginTop: 24,
+    shadowColor: "#b6ff45",
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
   },
   loginButtonPressed: {
     backgroundColor: "#566f27",
   },
   loginButtonText: {
     color: "#ffffff",
-    fontSize: 17,
+    fontSize: 13,
     fontWeight: "700",
+    letterSpacing: 0.2,
   },
 });
 

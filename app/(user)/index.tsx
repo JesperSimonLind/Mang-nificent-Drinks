@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import Feather from "@expo/vector-icons/Feather";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { StatusBar } from "expo-status-bar";
 import { useFocusEffect, useRouter } from "expo-router";
 import {
@@ -95,15 +97,23 @@ const Home = () => {
               ]}
               onPress={() => router.push("/wheel")}
             >
-              <Text style={[styles.btnText, styles.wheelBtnText]}>
-                🎡 WHEEL OF DESTINY
-              </Text>
+              <View style={styles.buttonContent}>
+                <Feather color="#ffffff" name="disc" size={19} />
+                <Text style={styles.primaryButtonText}>WHEEL OF DESTINY</Text>
+              </View>
             </Pressable>
             <Pressable
               style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
               onPress={() => router.push("/menu")}
             >
-              <Text style={styles.btnText}>🍹 DRINKMENY</Text>
+              <View style={styles.buttonContent}>
+                <MaterialCommunityIcons
+                  color="#b3c2a8"
+                  name="glass-cocktail"
+                  size={19}
+                />
+                <Text style={styles.btnText}>DRINKMENY</Text>
+              </View>
             </Pressable>
           </View>
         </View>
@@ -206,19 +216,19 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignItems: "center",
-    backgroundColor: "rgba(0, 5, 3, 0.86)",
-    borderColor: "#93a688",
-    borderRadius: 8,
-    borderWidth: 2,
+    backgroundColor: "rgba(7, 16, 13, 0.92)",
+    borderColor: "#698530",
+    borderRadius: 10,
+    borderWidth: 1,
     justifyContent: "center",
-    marginTop: 16,
-    minHeight: 74,
+    height: 58,
+    marginTop: 12,
     paddingHorizontal: 20,
     width: "100%",
   },
   wheelBtn: {
-    backgroundColor: "rgba(24, 43, 15, 0.9)",
-    borderColor: "#698530",
+    backgroundColor: "#698530",
+    borderColor: "#9eea32",
     shadowColor: "#b6ff45",
     shadowOpacity: 0.3,
     shadowRadius: 12,
@@ -229,7 +239,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   pressed: {
-    backgroundColor: "rgba(105, 133, 48, 0.2)",
+    backgroundColor: "#566f27",
   },
   logo: {
     height: 396,
@@ -244,14 +254,22 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   btnText: {
-    color: "#d5d8d1",
+    color: "#b3c2a8",
     fontWeight: "700",
     textAlign: "center",
-    fontSize: 17,
-    letterSpacing: 0,
+    fontSize: 14,
+    letterSpacing: 0.2,
   },
-  wheelBtnText: {
-    color: "#93a688",
+  primaryButtonText: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "700",
+    letterSpacing: 0.2,
+  },
+  buttonContent: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 9,
   },
 });
 

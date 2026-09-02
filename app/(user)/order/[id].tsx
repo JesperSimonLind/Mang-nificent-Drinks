@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -14,6 +16,7 @@ type Drink = {
   id: string;
   name?: string;
   description?: string;
+  imageUrl?: string;
   ingredients?: string[];
 };
 
@@ -90,21 +93,22 @@ const OrderDrink = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.subtitle}>
-        Kontrollera din drink och fyll i dina uppgifter.
-      </Text>
-
       <View style={styles.drinkCard}>
-        <Text style={styles.cardLabel}>Din drink</Text>
-        <Text style={styles.drinkName}>{drink.name ?? "Untitled drink"}</Text>
-        {drink.description ? (
-          <Text style={styles.description}>{drink.description}</Text>
-        ) : null}
-        {drink.ingredients?.length ? (
-          <Text style={styles.ingredients}>
-            {drink.ingredients.join("  |  ")}
-          </Text>
-        ) : null}
+        {drink.imageUrl ? (
+          <Image source={{ uri: drink.imageUrl }} style={styles.drinkImage} />
+        ) : (
+          <View style={styles.drinkImagePlaceholder}>
+            <MaterialCommunityIcons
+              color="#ffbe55"
+              name="glass-cocktail"
+              size={28}
+            />
+          </View>
+        )}
+        <View style={styles.drinkInfo}>
+          <Text style={styles.cardLabel}>Din drink</Text>
+          <Text style={styles.drinkName}>{drink.name ?? "Okänd drink"}</Text>
+        </View>
       </View>
 
       <Text style={styles.label}>Ditt namn</Text>
@@ -117,7 +121,7 @@ const OrderDrink = () => {
         value={customerName}
       />
 
-      <Text style={styles.label}>Meddelande till bartendern</Text>
+      <Text style={styles.label}>Meddelande till bartendern (valfritt)</Text>
       <TextInput
         multiline
         onChangeText={setMessage}
@@ -130,18 +134,20 @@ const OrderDrink = () => {
 
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
 
-      <Pressable
-        disabled={isSubmitting}
-        onPress={handleSubmitOrder}
-        style={({ pressed }) => [
-          styles.submitButton,
-          (pressed || isSubmitting) && styles.submitButtonPressed,
-        ]}
-      >
-        <Text style={styles.submitButtonText}>
-          {isSubmitting ? "Skickar..." : "Skicka beställning"}
-        </Text>
-      </Pressable>
+      <View style={styles.footer}>
+        <Pressable
+          disabled={isSubmitting}
+          onPress={handleSubmitOrder}
+          style={({ pressed }) => [
+            styles.submitButton,
+            (pressed || isSubmitting) && styles.submitButtonPressed,
+          ]}
+        >
+          <Text style={styles.submitButtonText}>
+            {isSubmitting ? "SKICKAR..." : "SKICKA BESTÄLLNING"}
+          </Text>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 };
@@ -150,8 +156,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#0a0a0a",
     flexGrow: 1,
-    padding: 20,
-    paddingTop: 32,
+    padding: 22,
+    paddingTop: 20,
   },
   centeredState: {
     alignItems: "center",
@@ -165,79 +171,89 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-  subtitle: {
-    color: "#a4aaa0",
-    fontSize: 16,
-    lineHeight: 23,
-    marginTop: 8,
-  },
   drinkCard: {
+    alignItems: "center",
     backgroundColor: "#10160f",
     borderColor: "#334229",
     borderRadius: 8,
     borderWidth: 1,
-    marginTop: 24,
-    padding: 18,
+    flexDirection: "row",
+    minHeight: 94,
+    padding: 12,
     shadowColor: "#b6ff45",
     shadowOpacity: 0.1,
     shadowRadius: 12,
   },
   cardLabel: {
-    color: "#93a688",
-    fontSize: 13,
-    fontWeight: "700",
-    textTransform: "uppercase",
+    color: "#87908c",
+    fontSize: 12,
+    fontWeight: "400",
   },
   drinkName: {
     color: "#d5d8d1",
-    fontSize: 22,
+    fontSize: 19,
     fontWeight: "700",
-    marginTop: 6,
+    marginTop: 4,
   },
-  description: {
-    color: "#a4aaa0",
-    fontSize: 15,
-    lineHeight: 21,
-    marginTop: 8,
+  drinkImage: {
+    borderRadius: 6,
+    height: 68,
+    width: 68,
   },
-  ingredients: {
-    color: "#93a688",
-    fontSize: 13,
-    fontWeight: "600",
-    lineHeight: 20,
-    marginTop: 12,
+  drinkImagePlaceholder: {
+    alignItems: "center",
+    backgroundColor: "#1d2616",
+    borderColor: "#52663d",
+    borderRadius: 6,
+    borderWidth: 1,
+    height: 68,
+    justifyContent: "center",
+    width: 68,
+  },
+  drinkInfo: {
+    flex: 1,
+    marginLeft: 16,
   },
   label: {
     color: "#b3c2a8",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "700",
-    marginTop: 22,
-    marginBottom: 8,
+    marginTop: 26,
+    marginBottom: 10,
   },
   input: {
     backgroundColor: "#10160f",
     borderColor: "#40522c",
-    borderRadius: 6,
+    borderRadius: 7,
     borderWidth: 1,
     color: "#d5d8d1",
     fontSize: 16,
-    paddingHorizontal: 14,
-    paddingVertical: 13,
+    minHeight: 54,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
   },
   messageInput: {
-    height: 112,
+    height: 118,
   },
   error: {
     color: "#d16054",
     fontSize: 14,
     marginTop: 12,
   },
+  footer: {
+    borderTopColor: "#26342c",
+    borderTopWidth: StyleSheet.hairlineWidth,
+    marginTop: 42,
+    paddingTop: 18,
+  },
   submitButton: {
     alignItems: "center",
     backgroundColor: "#698530",
-    borderRadius: 8,
-    marginTop: 24,
-    paddingVertical: 16,
+    borderColor: "#9eea32",
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 58,
+    justifyContent: "center",
     shadowColor: "#b6ff45",
     shadowOpacity: 0.35,
     shadowRadius: 12,
@@ -248,8 +264,10 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: "#ffffff",
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: "700",
+    letterSpacing: 0.2,
+    textAlign: "center",
   },
 });
 

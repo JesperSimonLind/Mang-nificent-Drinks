@@ -103,7 +103,12 @@ const Wheel = () => {
         <Animated.View
           style={[styles.wheel, { transform: [{ rotate: spin }] }]}
         >
-          <Svg height={WHEEL_SIZE} width={WHEEL_SIZE}>
+          <Svg
+            height="100%"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox={`0 0 ${WHEEL_SIZE} ${WHEEL_SIZE}`}
+            width="100%"
+          >
             {drinks.map((drink, index) => {
               const sliceAngle = 360 / drinks.length;
               return (
@@ -141,10 +146,7 @@ const Wheel = () => {
             const left = WHEEL_CENTER + Math.sin(radians) * LABEL_RADIUS - 42;
             const top = WHEEL_CENTER - Math.cos(radians) * LABEL_RADIUS - 18;
             return (
-              <View
-                key={drink.id}
-                style={[styles.wheelLabel, { left, top }]}
-              >
+              <View key={drink.id} style={[styles.wheelLabel, { left, top }]}>
                 <Text
                   numberOfLines={2}
                   style={[
@@ -199,9 +201,10 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#7c8a84",
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 24,
+    lineHeight: 28,
     textAlign: "center",
+    transform: [{ translateY: -80 }],
   },
   wheelArea: {
     alignItems: "center",
@@ -211,6 +214,7 @@ const styles = StyleSheet.create({
     width: WHEEL_SIZE,
   },
   wheel: {
+    alignItems: "center",
     backgroundColor: "#07100d",
     borderColor: "#8bcf1d",
     borderRadius: WHEEL_SIZE / 2,
@@ -218,6 +222,7 @@ const styles = StyleSheet.create({
     height: WHEEL_SIZE,
     overflow: "hidden",
     position: "absolute",
+    justifyContent: "center",
     shadowColor: "#8bcf1d",
     shadowOpacity: 0.22,
     shadowRadius: 12,
