@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import { DarkTheme, ThemeProvider } from "expo-router/react-navigation";
 import { Stack } from "expo-router";
 import { enableFreeze } from "react-native-screens";
 
