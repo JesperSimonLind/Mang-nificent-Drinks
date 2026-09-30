@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import {
   Alert,
   Image,
+  Platform,
   Pressable,
   StyleSheet,
   Switch,
@@ -120,10 +121,13 @@ const DrinkForm = ({
   };
 
   const pickImage = async (source: "camera" | "library") => {
+    // On web the file input must open within the tap, so skip the permission await.
     const permission =
-      source === "camera"
-        ? await ImagePicker.requestCameraPermissionsAsync()
-        : await ImagePicker.requestMediaLibraryPermissionsAsync();
+      Platform.OS === "web"
+        ? { granted: true }
+        : source === "camera"
+          ? await ImagePicker.requestCameraPermissionsAsync()
+          : await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permission.granted) {
       setErrorMessage(
@@ -164,6 +168,12 @@ const DrinkForm = ({
   };
 
   const handleImagePress = () => {
+    // Alert buttons are not supported on web; iOS's file picker offers camera and library itself.
+    if (Platform.OS === "web") {
+      pickImage("library");
+      return;
+    }
+
     Alert.alert("Lägg till bild", undefined, [
       { onPress: () => pickImage("camera"), text: "Ta foto" },
       { onPress: () => pickImage("library"), text: "Välj från bibliotek" },

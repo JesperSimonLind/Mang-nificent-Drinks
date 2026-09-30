@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { getDrinkById } from "../../../../firebase/test";
 import ScreenEntrance from "../../../../components/ScreenEntrance";
 
@@ -50,52 +57,58 @@ const WheelResult = () => {
     );
 
   return (
-    <ScreenEntrance style={styles.container}>
-      <Text style={styles.eyebrow}>Du fick</Text>
-      <Text style={styles.title}>{drink.name ?? "a drink"}</Text>
-      {drink.imageUrl ? (
-        <Image source={{ uri: drink.imageUrl }} style={styles.image} />
-      ) : (
-        <View style={styles.imagePlaceholder}>
-          <Text style={styles.placeholderText}>
-            {drink.name?.slice(0, 1).toUpperCase() ?? "D"}
-          </Text>
-        </View>
-      )}
-      {drink.description ? (
-        <Text style={styles.description}>{drink.description}</Text>
-      ) : null}
-      <Pressable
-        onPress={() =>
-          router.push({ pathname: "/order/[id]", params: { id: drink.id } })
-        }
-        style={({ pressed }) => [
-          styles.primaryButton,
-          pressed && styles.primaryPressed,
-        ]}
-      >
-        <Text style={styles.primaryButtonText}>Order drink</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => router.replace("/wheel")}
-        style={({ pressed }) => [
-          styles.secondaryButton,
-          pressed && styles.secondaryPressed,
-        ]}
-      >
-        <Text style={styles.secondaryButtonText}>Spin again</Text>
-      </Pressable>
+    <ScreenEntrance style={styles.screen}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.eyebrow}>Du fick</Text>
+        <Text style={styles.title}>{drink.name ?? "a drink"}</Text>
+        {drink.imageUrl ? (
+          <Image source={{ uri: drink.imageUrl }} style={styles.image} />
+        ) : (
+          <View style={styles.imagePlaceholder}>
+            <Text style={styles.placeholderText}>
+              {drink.name?.slice(0, 1).toUpperCase() ?? "D"}
+            </Text>
+          </View>
+        )}
+        {drink.description ? (
+          <Text style={styles.description}>{drink.description}</Text>
+        ) : null}
+        <Pressable
+          onPress={() =>
+            router.push({ pathname: "/order/[id]", params: { id: drink.id } })
+          }
+          style={({ pressed }) => [
+            styles.primaryButton,
+            pressed && styles.primaryPressed,
+          ]}
+        >
+          <Text style={styles.primaryButtonText}>Order drink</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => router.replace("/wheel")}
+          style={({ pressed }) => [
+            styles.secondaryButton,
+            pressed && styles.secondaryPressed,
+          ]}
+        >
+          <Text style={styles.secondaryButtonText}>Spin again</Text>
+        </Pressable>
+      </ScrollView>
     </ScreenEntrance>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
+  screen: {
     backgroundColor: "#0a0a0a",
     flex: 1,
+  },
+  container: {
+    alignItems: "center",
+    flexGrow: 1,
     justifyContent: "flex-start",
     padding: 20,
+    paddingBottom: 48,
     paddingTop: 34,
   },
   centered: {
