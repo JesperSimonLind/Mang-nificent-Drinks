@@ -1,6 +1,7 @@
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Tabs } from "expo-router";
+import { getFocusedRouteNameFromRoute } from "expo-router/react-navigation";
 import { useRouter } from "expo-router";
 import { Pressable } from "react-native";
 
@@ -92,13 +93,15 @@ const UserLayout = () => {
       />
       <Tabs.Screen
         name="wheel"
-        options={{
+        options={({ route }) => ({
+          // The result stack renders its own header.
+          headerShown: getFocusedRouteNameFromRoute(route) !== "result",
           headerLeft: () => <BackToHomeButton />,
           title: "Wheel of destiny",
           tabBarIcon: ({ color, size }) => (
             <Feather color={color} name="disc" size={size} />
           ),
-        }}
+        })}
       />
       <Tabs.Screen
         name="myorders"

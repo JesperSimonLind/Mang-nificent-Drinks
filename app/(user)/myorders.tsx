@@ -101,12 +101,12 @@ const OrderSection = ({ title, orders }: OrderSectionProps) => {
 };
 
 const styles = StyleSheet.create({
-  screen: { flex: 1 },
+  screen: { flex: 1, backgroundColor: "#0a0a0a" },
   container: {
-    flex: 1,
-    backgroundColor: "#0a0a0a",
+    flexGrow: 1,
     padding: 20,
     paddingTop: 32,
+    paddingBottom: 48,
   },
   section: {
     marginTop: 28,
