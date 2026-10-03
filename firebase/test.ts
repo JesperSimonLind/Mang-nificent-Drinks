@@ -75,6 +75,11 @@ export async function createOrder({
   const orderReference = doc(collection(db, "orders"));
 
   await runTransaction(db, async (transaction) => {
+    const barSnapshot = await transaction.get(doc(db, "settings", "bar"));
+    if (barSnapshot.exists() && barSnapshot.data().isOpen !== true) {
+      throw new Error("The bar is closed.");
+    }
+
     const counterSnapshot = await transaction.get(counterReference);
     const orderNumber = (counterSnapshot.data()?.lastOrderNumber ?? 0) + 1;
 

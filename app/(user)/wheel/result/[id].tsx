@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { getDrinkById } from "../../../../firebase/test";
 import ScreenEntrance from "../../../../components/ScreenEntrance";
+import useBarStatus from "../../../../hooks/useBarStatus";
 
 type Drink = {
   id: string;
@@ -21,6 +22,7 @@ type Drink = {
 const WheelResult = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const isBarOpen = useBarStatus();
   const [drink, setDrink] = useState<Drink | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -74,15 +76,20 @@ const WheelResult = () => {
           <Text style={styles.description}>{drink.description}</Text>
         ) : null}
         <Pressable
+          disabled={!isBarOpen}
+          accessibilityState={{ disabled: !isBarOpen }}
           onPress={() =>
             router.push({ pathname: "/order/[id]", params: { id: drink.id } })
           }
           style={({ pressed }) => [
             styles.primaryButton,
             pressed && styles.primaryPressed,
+            !isBarOpen && styles.primaryDisabled,
           ]}
         >
-          <Text style={styles.primaryButtonText}>Order drink</Text>
+          <Text style={styles.primaryButtonText}>
+            {isBarOpen ? "Order drink" : "BAREN ÄR STÄNGD"}
+          </Text>
         </Pressable>
         <Pressable
           onPress={() => router.replace("/wheel")}
@@ -171,6 +178,11 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
   },
   primaryPressed: { backgroundColor: "#566f27" },
+  primaryDisabled: {
+    backgroundColor: "#334229",
+    opacity: 0.55,
+    shadowOpacity: 0,
+  },
   primaryButtonText: { color: "#ffffff", fontSize: 17, fontWeight: "700" },
   secondaryButton: {
     alignItems: "center",

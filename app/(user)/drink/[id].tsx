@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { getDrinkById } from "../../../firebase/test";
 import ScreenEntrance from "../../../components/ScreenEntrance";
+import useBarStatus from "../../../hooks/useBarStatus";
 
 type Drink = {
   id: string;
@@ -24,6 +25,7 @@ type Drink = {
 const DrinkDetails = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const isBarOpen = useBarStatus();
   const [drink, setDrink] = useState<Drink | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -89,9 +91,12 @@ const DrinkDetails = () => {
 
         <View style={styles.footer}>
           <Pressable
+            disabled={!isBarOpen}
+            accessibilityState={{ disabled: !isBarOpen }}
             style={({ pressed }) => [
               styles.orderButton,
               pressed && styles.orderButtonPressed,
+              !isBarOpen && styles.orderButtonDisabled,
             ]}
             onPress={() =>
               router.push({
@@ -100,7 +105,9 @@ const DrinkDetails = () => {
               })
             }
           >
-            <Text style={styles.orderButtonText}>BESTÄLL DEN HÄR</Text>
+            <Text style={styles.orderButtonText}>
+              {isBarOpen ? "BESTÄLL DEN HÄR" : "BAREN ÄR STÄNGD"}
+            </Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -206,6 +213,12 @@ const styles = StyleSheet.create({
   },
   orderButtonPressed: {
     backgroundColor: "#566f27",
+  },
+  orderButtonDisabled: {
+    backgroundColor: "#334229",
+    borderColor: "#40522c",
+    opacity: 0.55,
+    shadowOpacity: 0,
   },
   orderButtonText: {
     color: "#ffffff",

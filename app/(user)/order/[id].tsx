@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { createOrder, getDrinkById } from "../../../firebase/test";
 import ScreenEntrance from "../../../components/ScreenEntrance";
+import useBarStatus from "../../../hooks/useBarStatus";
 
 type Drink = {
   id: string;
@@ -24,6 +25,7 @@ type Drink = {
 const OrderDrink = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const isBarOpen = useBarStatus();
   const [drink, setDrink] = useState<Drink | null>(null);
   const [customerName, setCustomerName] = useState("");
   const [message, setMessage] = useState("");
@@ -48,6 +50,8 @@ const OrderDrink = () => {
   }, [id]);
 
   const handleSubmitOrder = async () => {
+    if (!isBarOpen || isSubmitting) return;
+
     if (!drink || !customerName.trim()) {
       setErrorMessage("Enter your name before sending the order.");
       return;
@@ -138,15 +142,21 @@ const OrderDrink = () => {
 
         <View style={styles.footer}>
           <Pressable
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isBarOpen}
+            accessibilityState={{ disabled: isSubmitting || !isBarOpen }}
             onPress={handleSubmitOrder}
             style={({ pressed }) => [
               styles.submitButton,
               (pressed || isSubmitting) && styles.submitButtonPressed,
+              !isBarOpen && styles.submitButtonDisabled,
             ]}
           >
             <Text style={styles.submitButtonText}>
-              {isSubmitting ? "SKICKAR..." : "SKICKA BESTÄLLNING"}
+              {!isBarOpen
+                ? "BAREN ÄR STÄNGD"
+                : isSubmitting
+                  ? "SKICKAR..."
+                  : "SKICKA BESTÄLLNING"}
             </Text>
           </Pressable>
         </View>
@@ -265,6 +275,12 @@ const styles = StyleSheet.create({
   submitButtonPressed: {
     backgroundColor: "#566f27",
     opacity: 0.82,
+  },
+  submitButtonDisabled: {
+    backgroundColor: "#334229",
+    borderColor: "#40522c",
+    opacity: 0.55,
+    shadowOpacity: 0,
   },
   submitButtonText: {
     color: "#ffffff",
