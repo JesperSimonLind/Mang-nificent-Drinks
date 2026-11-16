@@ -49,7 +49,7 @@ const AdminLayout = () => {
         options={{
           title: "Dashboard",
           tabBarIcon: ({ color, size }) => (
-            <Feather color={color} name="bar-chart-2" size={size} />
+            <Feather color={color as string} name="bar-chart-2" size={size} />
           ),
         }}
       />
@@ -59,7 +59,7 @@ const AdminLayout = () => {
           headerShown: false,
           title: "Orders",
           tabBarIcon: ({ color, size }) => (
-            <Feather color={color} name="clipboard" size={size} />
+            <Feather color={color as string} name="clipboard" size={size} />
           ),
         }}
       />
@@ -70,7 +70,7 @@ const AdminLayout = () => {
           title: "Drinks",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              color={color}
+              color={color as string}
               name="glass-cocktail"
               size={size}
             />

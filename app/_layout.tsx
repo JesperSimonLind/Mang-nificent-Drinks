@@ -26,7 +26,6 @@ const RootLayout = () => {
     <ThemeProvider value={appTheme}>
       <StatusBar style="light" />
       <Stack
-        initialRouteName="index"
         screenOptions={{
           animation: "fade",
           animationDuration: 220,

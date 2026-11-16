@@ -73,7 +73,7 @@ const UserLayout = () => {
           headerShown: false,
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Feather color={color} name="home" size={size} />
+            <Feather color={color as string} name="home" size={size} />
           ),
         }}
       />
@@ -84,7 +84,7 @@ const UserLayout = () => {
           title: "Drinkmeny",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              color={color}
+              color={color as string}
               name="glass-cocktail"
               size={size}
             />
@@ -99,7 +99,7 @@ const UserLayout = () => {
           headerLeft: () => <BackToHomeButton />,
           title: "Wheel of destiny",
           tabBarIcon: ({ color, size }) => (
-            <Feather color={color} name="disc" size={size} />
+            <Feather color={color as string} name="disc" size={size} />
           ),
         })}
       />
@@ -109,7 +109,7 @@ const UserLayout = () => {
           headerLeft: () => <BackToHomeButton />,
           title: "Mina beställningar",
           tabBarIcon: ({ color, size }) => (
-            <Feather color={color} name="clipboard" size={size} />
+            <Feather color={color as string} name="clipboard" size={size} />
           ),
         }}
       />

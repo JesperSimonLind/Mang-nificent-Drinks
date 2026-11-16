@@ -25,7 +25,7 @@ const AdminOrders = () => {
     useCallback(() => {
       async function loadOrders() {
         try {
-          setOrders((await getOrders()) as Order[]);
+          setOrders((await getOrders("asc")) as Order[]);
         } catch (error) {
           console.error("Unable to load admin orders:", error);
         } finally {

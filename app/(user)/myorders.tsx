@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { getOrders } from "../../firebase/test";
+import { getMyOrders } from "../../firebase/test";
 import ScreenEntrance from "../../components/ScreenEntrance";
 
 type Order = {
@@ -23,7 +23,7 @@ const MyOrders = () => {
         try {
           setIsLoading(true);
           setErrorMessage("");
-          const fetchedOrders = await getOrders();
+          const fetchedOrders = await getMyOrders();
           setOrders(fetchedOrders as Order[]);
         } catch (error) {
           console.error("Unable to load orders:", error);

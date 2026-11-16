@@ -1,5 +1,6 @@
 import {
   addDoc,
+  type DocumentData,
   collection,
   doc,
   getDoc,
@@ -10,8 +11,10 @@ import {
   serverTimestamp,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "./config";
+import { getCustomerId } from "./customer";
 
 export async function createTestDrink() {
   await addDoc(collection(db, "drinks"), {
@@ -71,6 +74,7 @@ export async function createOrder({
   customerName,
   message,
 }: CreateOrderInput) {
+  const customerId = await getCustomerId();
   const counterReference = doc(db, "settings", "order-counter");
   const orderReference = doc(collection(db, "orders"));
 
@@ -92,6 +96,7 @@ export async function createOrder({
       drinkId,
       drinkName,
       customerName,
+      customerId,
       message,
       orderNumber,
       status: "pending",
@@ -100,15 +105,34 @@ export async function createOrder({
   });
 }
 
-export async function getOrders() {
+export async function getOrders(direction: "asc" | "desc" = "desc") {
   const ordersSnapshot = await getDocs(
-    query(collection(db, "orders"), orderBy("createdAt", "desc")),
+    query(collection(db, "orders"), orderBy("createdAt", direction)),
   );
 
   return ordersSnapshot.docs.map((orderDocument) => ({
     id: orderDocument.id,
     ...orderDocument.data(),
   }));
+}
+
+export async function getMyOrders() {
+  const customerId = await getCustomerId();
+  const ordersSnapshot = await getDocs(
+    query(collection(db, "orders"), where("customerId", "==", customerId)),
+  );
+
+  // Sorted client-side to avoid requiring a composite Firestore index.
+  // Orders whose server timestamp is still pending count as newest.
+  const createdAtMillis = (order: DocumentData) =>
+    order.createdAt?.toMillis?.() ?? Number.MAX_SAFE_INTEGER;
+
+  return ordersSnapshot.docs
+    .map((orderDocument) => ({
+      id: orderDocument.id,
+      ...orderDocument.data(),
+    }))
+    .sort((a, b) => createdAtMillis(b) - createdAtMillis(a));
 }
 
 export async function getOrderById(id: string) {
